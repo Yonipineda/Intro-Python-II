@@ -1,4 +1,6 @@
 from room import Room
+import os 
+import time 
 
 # Declare all the rooms
 
