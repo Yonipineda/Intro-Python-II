@@ -11,5 +11,7 @@ class  Room:
     self.description = description 
     self.items = [] # list to store items
 
+    n_to, s_to, e_to, w_to = None, None, None, None 
+
     name: str 
     description: str

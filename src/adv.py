@@ -1,4 +1,10 @@
+# class imports 
 from room import Room
+from player import Player 
+from item import Item 
+from intro import Greetings
+
+# Basic imports 
 import os 
 import time 
 
@@ -34,6 +40,34 @@ room['overlook'].s_to = room['foyer']
 room['narrow'].w_to = room['foyer']
 room['narrow'].n_to = room['treasure']
 room['treasure'].s_to = room['narrow']
+
+
+
+# Items 
+item = {
+    'A Sack Of Potatoes' : Item('A Sack Of Potatoes', '''HAHAHA, fool. 
+            Those are no mere potatoes. They come from soil gifted from the gods. It is said, 
+            by a man I meet some time ago, that should you consume them, you will be stripped
+            from hunger. No longer shall human necessity chain you.'''),
+
+    '$3.50' : Item('$3.50', '''Spare change, always a plus! Too bad you won't escape nor 
+                    live to ever have need for such worldly things.'''),
+
+    'Hegels Dialectic' : Item('Hegels Dialectic', '''Hm.'''),
+
+    'Blunt Axe' : Item('Blunt Axe', '''An Axe tested in battle. War Ready, don't judge it for 
+                        its scar's but for its earned glory.'''),
+
+    'Broken Clock' : Item('Broken Clock' : '''A relic of an age long gone.'''), 
+
+    'Iskanders Journal' : Item('Iskanders Journal', '''Notes left unfinished and pages burnt.
+                                There seems to be a name, Iskanders? Hm, I don't recall such 
+                                a man.''')
+
+
+
+}
+
 
 #
 # Main

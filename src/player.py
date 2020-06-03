@@ -3,7 +3,7 @@
 
 import os 
 import time 
-
+import sys 
 # Player class 
 class Player:
     def __init__(self, name, current_room):  # name of player and his current room
