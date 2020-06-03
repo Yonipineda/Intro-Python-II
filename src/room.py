@@ -6,11 +6,10 @@ import time
 
 # Room class 
 class  Room:
-    def __init__(self, name, n_to, s_to, e_to, w_to)
+    def __init__(self, name, description)
     self.name = name 
-    self.n_to = n_to 
-    self.s_to = s_to 
-    self.e_to = e_to 
-    self.w_to = w_to 
+    self.description = description 
+    self.items = [] # list to store items
+
     name: str 
-    n_to, s_to, e_to, w_to: str, str, str, str 
+    description: str
