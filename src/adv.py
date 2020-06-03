@@ -2,7 +2,7 @@
 from room import Room
 from player import Player 
 from item import Item 
-from intro import Greetings
+from greet import Greetings
 
 # Basic imports 
 import os 
@@ -58,7 +58,7 @@ item = {
     'Blunt Axe' : Item('Blunt Axe', '''An Axe tested in battle. War Ready, don't judge it for 
                         its scar's but for its earned glory.'''),
 
-    'Broken Clock' : Item('Broken Clock' : '''A relic of an age long gone.'''), 
+    'Broken Clock' : Item('Broken Clock' , '''A relic of an age long gone.'''), 
 
     'Iskanders Journal' : Item('Iskanders Journal', '''Notes left unfinished and pages burnt.
                                 There seems to be a name, Iskanders? Hm, I don't recall such 
@@ -67,6 +67,15 @@ item = {
 
 
 }
+
+# Player 
+player = Player('player', room['outside'])
+room['outside'].items = [item[ot] for ot in str(Item)] 
+room['treasure'].items = [item[t] for t in str(Item)]
+room['overlook'].items = [item[o] for o in str(Item)]
+room['foyer'].items = [item[f] for f in str(Item)] 
+room['narrow'].items = [item[n] for n in str(Item)]
+
 
 
 #
@@ -85,3 +94,17 @@ item = {
 # Print an error message if the movement isn't allowed.
 #
 # If the user enters "q", quit the game.
+
+
+# Start The Game! 
+start = Greetings(name=Input("Name yourself or meet my Holy Sword, Rickerd.\n")
+while start[0] != None:
+    '''An introduction'''
+
+        # Tomchomp, Wielder of Rickard, Greets the player.
+        print("Ah, " + name + ".")
+        print("You have entered my chasm of rooms. For glory I presume.. matters not.\n")
+        print("All who enter my chasm perish. On with it, be on your way.\n")
+
+        # Player now chooses a path 
+        print(f"Now, {name}, choose a path to traverse, have no regrets.")
