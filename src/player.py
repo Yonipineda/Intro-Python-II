@@ -11,8 +11,7 @@ class Player:
         self.current_room = current_room 
         self.items = [] # empty list to store items 
 
-        name: str 
-        current_room: str 
+        
 
     def curr_items(self): 
         '''Items player has taken'''
@@ -44,7 +43,8 @@ class Player:
             self.items.remove(item) # delete item from inventory 
             self.current_room.items.append(item) # leave it in the room
             print("{} dropped in this shabby {}\n".format(item.name, self.current_room.name))
-
-
-
+            time.sleep(1)
+        except:
+            print(f"{item} is not in your possession.")
+            time.sleep(1)
     

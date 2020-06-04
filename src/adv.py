@@ -2,7 +2,6 @@
 from room import Room
 from player import Player 
 from item import Item 
-from greet import Greetings
 
 # Basic imports 
 import os 
@@ -69,12 +68,10 @@ item = {
 }
 
 # Player 
-player = Player('player', room['outside'])
-room['outside'].items = [item[ot] for ot in str(Item)] 
-room['treasure'].items = [item[t] for t in str(Item)]
-room['overlook'].items = [item[o] for o in str(Item)]
-room['foyer'].items = [item[f] for f in str(Item)] 
-room['narrow'].items = [item[n] for n in str(Item)]
+player = Player('test player', room['outside'])
+room['outside'].items = [item['A Sack Of Potatoes'], item['Iskanders Journal']]
+room['treasure'].items = [item['Broken Clock']]
+room['overlook'].items = [item['Blunt Axe'], item['Hegels Dialectic']]
 
 
 
@@ -97,14 +94,52 @@ room['narrow'].items = [item[n] for n in str(Item)]
 
 
 # Start The Game! 
-start = Greetings(name=Input("Name yourself or meet my Holy Sword, Rickerd.\n")
-while start[0] != None:
-    '''An introduction'''
+start = 'Starting Game. . .'
+while start[0] != 'q':
 
-        # Tomchomp, Wielder of Rickard, Greets the player.
-        print("Ah, " + name + ".")
-        print("You have entered my chasm of rooms. For glory I presume.. matters not.\n")
-        print("All who enter my chasm perish. On with it, be on your way.\n")
-
-        # Player now chooses a path 
-        print(f"Now, {name}, choose a path to traverse, have no regrets.")
+    print(f"Current room:{player.current_room.name} \
+            \n{player.current_room.description} \
+            \nitems in room: {', '.join([item.name for item in player.current_room.items])}")
+    print("\nChoose Your path, or don't or whatevuh.")
+    # Guide for player 
+    print(f""" Your inventory: {len(player.items)}   Perform an action: Take, Grab, Walk, die.
+                            
+                            Map
+                    --------------------
+                             n
+                          w     e
+                             s             """)
+    start = input("~~~~~~~~~~~: ")
+    # Parse response into verbs and nouns. Beyond two inputs are ignored
+    verb_noun = ['verb','noun']
+    resp_list = start.split()
+    verb_noun_dict = dict(zip(verb_noun,resp_list))
+    verb, noun = verb_noun_dict.get('verb', False), verb_noun_dict.get('noun', False)
+    try:
+        if noun: # Check if 2nd argument is made, if so, assume it's a noun
+            if verb == 'take':
+                player.gain_item(item.get(noun, False)) # return False if not exist
+            elif verb == 'drop':
+                player.lose_item(item.get(noun, False))
+            else:
+                raise AttributeError
+        else: # If eval fails, exec will not change
+            next_room = eval(f'player.current_room.{verb}_to')
+            if next_room != None:
+                exec(f'player.current_room = player.current_room.{verb}_to')
+                os.system('clear')
+            else:
+                os.system('clear')
+                print("Are you shtupid? Innit clear that that tis the wrong way.")
+                time.sleep(1)
+    except AttributeError:
+        if start[0] == 'q':
+            print("You can't escape, only death will release you, meet my Holy Sword. ")
+        elif start[0] == 'i':
+            os.system('clear')
+            player.show_inventory()
+            time.sleep(1)
+        else:
+            os.system('clear')
+            print(f'invalid option, "{start}" not understood, try again...')
+            time.sleep(1)
